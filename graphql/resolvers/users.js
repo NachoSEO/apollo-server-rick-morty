@@ -19,7 +19,6 @@ function generateToken(user) {
 module.exports = {
     Mutation: {
         async login(_, payload) {
-             console.log("TCL: login -> payload", payload)
              const { valid, errors } = validateLoginPayload(payload);
 
             if (!valid) {
