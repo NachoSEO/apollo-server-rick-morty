@@ -6,10 +6,18 @@ module.exports = gql`
       password: String!
       confirmPassword: String!
     }
+    input CharacterPayload {
+      name: String!
+      status: String!
+      image: String!
+      gender: String!
+    }
     type Character {
       id: ID!
       name: String!
       status: String!
+      image: String!
+      gender: String!
     }
     type User {
       id: ID!
@@ -17,10 +25,13 @@ module.exports = gql`
       token: String!
     }
     type Query {
-        getCharacters: [Character] 
+        characters: [Character],
+        character(id: ID!): Character
     }
     type Mutation {
       login(username: String!, password: String!): User!
       register(payload: RegisterPayload): User!
+      createCharacter(payload: CharacterPayload!): Character!
+      deleteCharacter(id: ID!): String!
     }
 `;
