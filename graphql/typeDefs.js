@@ -1,11 +1,6 @@
 const gql = require('graphql-tag');
 
 module.exports = gql`
-    input RegisterPayload {
-      username: String!
-      password: String!
-      confirmPassword: String!
-    }
     input CharacterPayload {
       name: String!
       status: String!
@@ -19,19 +14,13 @@ module.exports = gql`
       image: String!
       gender: String!
     }
-    type User {
-      id: ID!
-      username: String!
-      token: String!
-    }
     type Query {
-        characters: [Character],
+        characters(name: String!): [Character],
         character(id: ID!): Character
     }
     type Mutation {
-      login(username: String!, password: String!): User!
-      register(payload: RegisterPayload): User!
       createCharacter(payload: CharacterPayload!): Character!
+      updateCharacter(id: ID!, payload: CharacterPayload): Character!
       deleteCharacter(id: ID!): String!
     }
 `;

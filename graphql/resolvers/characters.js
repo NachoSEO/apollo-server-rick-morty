@@ -2,9 +2,10 @@ const Character = require('../../models/Character');
 
 module.exports = {
   Query: {
-    async characters() {
+    async characters(_, { name = '' }) {
       try {
-        const characters = await Character.find();
+        const $regex = new RegExp(name, "i");
+        const characters = await Character.find({ name: { $regex } });
 
         return characters;
       } catch (err) {
