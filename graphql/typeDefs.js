@@ -12,8 +12,11 @@ module.exports = gql`
       gender: String!
     }
     type Query {
-        characters(name: String!, status: String!, gender: String!): [Character],
-        character(id: ID!): Character
+        characters(
+          name: String!,
+          status: String!,
+          gender: String!
+        ): [Character]
     }
     type Mutation {
       createCharacter(
@@ -21,13 +24,6 @@ module.exports = gql`
         status: String!,
         gender: String!,
         image: String!
-      ): Character!
-      updateCharacter(
-        id: ID!,
-        name: String!,
-        status: String!,
-        gender: String!,
-        iamge: String!
       ): Character!
       deleteCharacter(id: ID!): String!
     }
