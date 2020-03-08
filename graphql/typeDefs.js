@@ -2,7 +2,7 @@ const gql = require('graphql-tag');
 
 module.exports = gql`
     """
-    Comments like that
+    Types
     """
     type Character {
       id: ID!
@@ -10,21 +10,38 @@ module.exports = gql`
       status: String!
       image: String!
       gender: String!
+      location: Location
+    }
+    type Location {
+      id: ID!
+      name: String!
     }
     type Query {
-        characters(
-          name: String!,
-          status: String!,
-          gender: String!
-        ): [Character]
+      """
+      Get the list of all characters
+      """
+      characters(name: String, status: String, gender: String): [Character]
+      """
+      Get the list of all locations
+      """
+      locations: [Location]!
+      """
+      Get a location by Id
+      """
+      location(id: ID!): Location
     }
     type Mutation {
-      createCharacter(
-        name: String!,
-        status: String!,
-        gender: String!,
-        image: String!
-      ): Character!
+      """
+      Create new location
+      """
+      createLocation(name: String!): Location!
+      """
+      Create new character
+      """
+      createCharacter(name: String!, status: String!, gender: String!, image: String!): Character!
+      """
+      Delete a character
+      """
       deleteCharacter(id: ID!): String!
     }
 `;

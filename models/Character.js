@@ -1,4 +1,6 @@
+
 const { model, Schema } = require('mongoose');
+const Location = require('./Location');
 
 const characterSchema = new Schema({
     name: String,
@@ -11,6 +13,10 @@ const characterSchema = new Schema({
         type: String,
         enum: ['male', 'female', 'unknown'],
     },
+    location: {
+        type: Schema.Types.ObjectId,
+        ref: 'Location'
+    }
 });
 
 module.exports = model('Character', characterSchema);

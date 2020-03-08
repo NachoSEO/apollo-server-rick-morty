@@ -8,7 +8,7 @@ const getEnumValues = (field, value) => {
 
 module.exports = {
   Query: {
-    async characters(_, { name = '', status, gender }) {
+    characters: async (_, { name = '', status, gender }) => {
       try {
         const nameRegEx = new RegExp(name, "i");
         const statusEnum = getEnumValues('status', status);
@@ -18,8 +18,9 @@ module.exports = {
             name: { $regex: nameRegEx },
             status: { $in: statusEnum },
             gender: { $in: genderEnum },
-          });
-
+          })
+          .populate('location')
+        ;
         return characters;
       } catch (err) {
         throw new Error(err);
@@ -27,7 +28,7 @@ module.exports = {
     },
   },
   Mutation: {
-    async createCharacter(_, payload) {
+    createCharacter: async (_, payload) => {
       const newCharacter = new Character(payload);
 
       try {
@@ -37,5 +38,5 @@ module.exports = {
         throw new Error(err);
       }
     },
-  }
+  },
 }
