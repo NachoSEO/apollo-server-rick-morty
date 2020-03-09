@@ -38,7 +38,7 @@ module.exports = gql`
       """
       Create new character
       """
-      createCharacter(name: String!, status: String!, gender: String!, image: String!): Character!
+      createCharacter(name: String!, status: String!, gender: String!, image: String!, location: ID!): Character!
       """
       Delete a character
       """

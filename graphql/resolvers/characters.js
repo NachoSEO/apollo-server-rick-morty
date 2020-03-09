@@ -33,6 +33,7 @@ module.exports = {
 
       try {
         const character = await newCharacter.save();
+
         return character;
       } catch (err) {
         throw new Error(err);
